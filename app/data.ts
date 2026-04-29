@@ -8,7 +8,7 @@ export const articleData: IArticleCardProps[] = [
         text:"The world is getting smaller and we’re becoming more mobile. So why should you be forced to only receive money in a single …"
     },
     {
-        imageSrc: "/image-currency.jpg", //todo get restaurant img from unsplash
+        imageSrc: "/image-restaurant.jpg", //todo get restaurant img from unsplash
         heading: "Treat yourself without worrying about money",
         text: "Our simple budgeting feature allows you to separate out your spending and set realistic limits each month. That means you …",
         author: "Wilson Hutton"
