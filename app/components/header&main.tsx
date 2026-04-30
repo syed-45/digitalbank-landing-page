@@ -18,7 +18,7 @@ export const HeaderAndMain = () => {
                 </div>                
                 <div className="lg:pl-6 lg:content-center lg:w-[32%]">
                     <h1 className="lg:px-0 text-Blue-950 mb-6 text-[39px] font-normal px-6 -mt-10 lg:mt-0">Next generation digital banking</h1>
-                    <p className="lg:px-0 mb-3 px-6 tracking-tighter leading-5">
+                    <p className="lg:px-0 mb-6 px-6 tracking-tighter leading-5">
                         Take your financial life online. Your Digitalbank account will be a one-stop-shop for
                         spending, saving, budgeting, investing, and much more. 
                     </p>

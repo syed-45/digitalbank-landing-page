@@ -10,7 +10,7 @@ interface IHeaderProps {
 
 export const Header = ({isMenuOpen, setMenuIsOpen}: IHeaderProps): JSX.Element => {
     return (
-        <header className="max-w-7xl mx-auto flex items-center justify-center lg:justify-start pl-5 pr-7 py-6 lg:py-3 bg-white">
+        <header className="max-w-7xl mx-auto w-full flex items-center justify-center lg:justify-start pl-5 pr-7 py-9 lg:py-6 bg-white">
             <div className="w-full grow lg:grow-0 lg:w-fit">
                 <Image src="/logo-dark.svg" alt="logo" width={5000} height={5000} className="w-[150px] lg:w-46"/>
             </div>
@@ -21,13 +21,26 @@ export const Header = ({isMenuOpen, setMenuIsOpen}: IHeaderProps): JSX.Element =
                     e.stopPropagation()
                 }}
             >
-                <Link href={'/'} onClick={() => setMenuIsOpen(false)}>Home</Link>
-                <Link href={'/'} onClick={() => setMenuIsOpen(false)}>About</Link>
-                <Link href={'/'} onClick={() => setMenuIsOpen(false)}>Contact</Link>
-                <Link href={'/'} onClick={() => setMenuIsOpen(false)}>Blog</Link>
-                <Link href={'/'} onClick={() => setMenuIsOpen(false)}>Careers</Link>
+                <Link href={'/'} onClick={() => setMenuIsOpen(false)} className="relative">
+                    <span className="peer hover:text-black transition-colors duration-300">Home</span>
+                    <div className="min-h-1 min-w-full absolute -bottom-9 left-0 bg-linear-to-tr from-Cyan-400 to-Green-500 opacity-0 transition-opacity duration-300 peer-hover:opacity-100"></div>
+                </Link>
+                <Link href={'/'} onClick={() => setMenuIsOpen(false)} className="relative">
+                    <span className="peer hover:text-black transition-colors duration-300">About</span>
+                    <div className="min-h-1 min-w-full absolute -bottom-9 left-0 bg-linear-to-tr from-Cyan-400 to-Green-500 opacity-0 transition-opacity duration-300 peer-hover:opacity-100"></div>
+                </Link><Link href={'/'} onClick={() => setMenuIsOpen(false)} className="relative">
+                    <span className="peer hover:text-black transition-colors duration-300">Contact</span>
+                    <div className="min-h-1 min-w-full absolute -bottom-9 left-0 bg-linear-to-tr from-Cyan-400 to-Green-500 opacity-0 transition-opacity duration-300 peer-hover:opacity-100"></div>
+                </Link><Link href={'/'} onClick={() => setMenuIsOpen(false)} className="relative">
+                    <span className="peer hover:text-black transition-colors duration-300">Blog</span>
+                    <div className="min-h-1 min-w-full absolute -bottom-9 left-0 bg-linear-to-tr from-Cyan-400 to-Green-500 opacity-0 transition-opacity duration-300 peer-hover:opacity-100"></div>
+                </Link><Link href={'/'} onClick={() => setMenuIsOpen(false)} className="relative">
+                    <span className="peer hover:text-black transition-colors duration-300">Careers</span>
+                    <div className="min-h-1 min-w-full absolute -bottom-9 left-0 bg-linear-to-tr from-Cyan-400 to-Green-500 opacity-0 transition-opacity duration-300 peer-hover:opacity-100"></div>
+                </Link>
+                
             </nav>
-            <div className="hidden lg:block ">
+            <div className="hidden lg:block">
                 <RequestInvBtn/>
             </div>
             <button 
