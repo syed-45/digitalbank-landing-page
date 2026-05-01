@@ -31,7 +31,7 @@ export default function Home() {
       </section>
       <section className="bg-Gray-50 pt-12 lg:pt-16 lg:px-6">
         <h2 className="text-Blue-950 mb-8 lg:mb-12 text-3xl font-normal max-w-7xl mx-auto">Latest Articles</h2>
-        <div className="flex flex-col items-center lg:flex-row lg:items-start px-6 lg:px-0 lg:gap-8 pb-16 max-w-7xl mx-auto">
+        <div className="flex flex-col items-center lg:flex-row lg:items-start px-6 lg:px-0 lg:gap-8 pb-16 max-w-3xl lg:max-w-7xl mx-auto">
           {articleData.map(article => 
             <ArticleCard 
                 key={article.heading+article.text}
