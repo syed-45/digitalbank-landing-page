@@ -28,13 +28,16 @@ export const Header = ({isMenuOpen, setMenuIsOpen}: IHeaderProps): JSX.Element =
                 <Link href={'/'} onClick={() => setMenuIsOpen(false)} className="relative">
                     <span className="peer hover:text-black transition-colors duration-300">About</span>
                     <div className="min-h-1 min-w-full absolute -bottom-9 left-0 bg-linear-to-tr from-Cyan-400 to-Green-500 opacity-0 transition-opacity duration-300 peer-hover:opacity-100"></div>
-                </Link><Link href={'/'} onClick={() => setMenuIsOpen(false)} className="relative">
+                </Link>
+                <Link href={'/'} onClick={() => setMenuIsOpen(false)} className="relative">
                     <span className="peer hover:text-black transition-colors duration-300">Contact</span>
                     <div className="min-h-1 min-w-full absolute -bottom-9 left-0 bg-linear-to-tr from-Cyan-400 to-Green-500 opacity-0 transition-opacity duration-300 peer-hover:opacity-100"></div>
-                </Link><Link href={'/'} onClick={() => setMenuIsOpen(false)} className="relative">
+                </Link>
+                <Link href={'/'} onClick={() => setMenuIsOpen(false)} className="relative">
                     <span className="peer hover:text-black transition-colors duration-300">Blog</span>
                     <div className="min-h-1 min-w-full absolute -bottom-9 left-0 bg-linear-to-tr from-Cyan-400 to-Green-500 opacity-0 transition-opacity duration-300 peer-hover:opacity-100"></div>
-                </Link><Link href={'/'} onClick={() => setMenuIsOpen(false)} className="relative">
+                </Link>
+                <Link href={'/'} onClick={() => setMenuIsOpen(false)} className="relative">
                     <span className="peer hover:text-black transition-colors duration-300">Careers</span>
                     <div className="min-h-1 min-w-full absolute -bottom-9 left-0 bg-linear-to-tr from-Cyan-400 to-Green-500 opacity-0 transition-opacity duration-300 peer-hover:opacity-100"></div>
                 </Link>
@@ -51,7 +54,7 @@ export const Header = ({isMenuOpen, setMenuIsOpen}: IHeaderProps): JSX.Element =
                 {isMenuOpen ? <CloseIcon/>: <MenuIcon/>}
             </button>
             <div 
-                className={`lg:hidden transition transition-discrete duration-500 ${isMenuOpen ? "block opacity-100 " : "hidden opacity-0 "} starting:opacity-0 h-dvh w-full bg-linear-to-b from-black/50 absolute top-[69.4px] left-0 flex`}
+                className={`lg:hidden transition transition-discrete duration-500 ${isMenuOpen ? "block opacity-100 " : "hidden opacity-0 "} starting:opacity-0 h-dvh w-full bg-linear-to-b from-black/50 absolute top-[93.43px] left-0 flex`}
                 onClick={() => setMenuIsOpen(false)}
             >
                 <nav 
