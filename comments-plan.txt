@@ -1,0 +1,5 @@
+- implement front end
+    - add in colors, fonts
+    - create comment component, 
+    - as one user, interact with other commented comments, like, dislike, comment.
+        - be able to delete / remove own interactions, comments.

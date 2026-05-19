@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${publicSans.variable} h-full antialiased`}
+      className={`${publicSans.variable} h-full antialiased text-Grey-800`}
     >
       <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png"></link>
       <body className="min-h-full">{children}</body>

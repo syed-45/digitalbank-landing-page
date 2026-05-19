@@ -9,12 +9,15 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-public-sans);
   --font-mono: var(--font-public-mono);
-  --color-Blue-950: hsl(233, 26%, 24%);
-  --color-Green-500: hsl(136, 64%, 51%);
-  --color-Cyan-400: hsl(192, 69%, 51%);
-  --color-Gray-600: hsl(233, 8%, 62%);
-  --color-Gray-100: hsl(220, 16%, 96%);
-  --color-Gray-50: hsl(0, 0%, 98%);
+  --color-Purple-600: hsl(238, 40%, 52%);
+  --color-Pink-400: hsl(358, 79%, 66%);
+  --color-Purple-200: hsl(239, 57%, 85%);
+  --color-Pink-200: hsl(357, 100%, 86%);
+  --color-Grey-800: hsl(212, 24%, 26%);
+  --color-Grey-500: hsl(211, 10%, 45%);
+  --color-Grey-100: hsl(223, 19%, 93%);
+  --color-Grey-50: hsl(228, 33%, 97%);
+  /* implement [Rubik](https://fonts.google.com/specimen/Rubik) */
 }
 
 body {
