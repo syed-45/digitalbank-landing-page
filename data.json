@@ -14,10 +14,10 @@
       "score": 12,
       "user": {
         "image": { 
-          "png": "./images/avatars/image-amyrobson.png",
-          "webp": "./images/avatars/image-amyrobson.webp"
+          "png": "./images/avatars/image-bobrobson.png",
+          "webp": "./images/avatars/image-bobrobson.webp"
         },
-        "username": "amyrobson"
+        "username": "bobrobson"
       },
       "replies": []
     },

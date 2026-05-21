@@ -1,47 +1,43 @@
+import { IReply } from "../page"
+import { CommentMain } from "./comment-main"
 import { LikeDislikeCounter } from "./like-dislike-counter"
-import Image from "next/image"
+import { Replies } from "./replies"
 
-interface IComment {
+export interface IComment {
     id: number
-    date: Date,
+    date: string,
     name: string,
     numOfLikes: number,
-    likeFn: () => void
-    disLikeFn: () => void
-    replyFn: () => void
+    comment: string
     isOwnComment: boolean
-    editFn: () => void
-    deleteFn: () => void
+    deleteFn: (id: number) => void,
+    
+    replies: IReply[]
 }
 
-export const comment = ({id, date, name, numOfLikes, likeFn, disLikeFn, replyFn, isOwnComment, editFn, deleteFn}: IComment) => {
+export const Comment = ({id, comment, date, name, numOfLikes, isOwnComment, deleteFn, replies}: IComment) => {
     return (
-        <div className="bg-white flex items-center justify-center rounded-lg w-full shadow-xs p-6">
-            <LikeDislikeCounter 
-              commentId={1}
-              numOfLikes={3} 
-              likeFn={(commentId) => console.log(commentId)} 
-              dislikeFn={(commentId) => console.log(commentId)} 
-            />
-            <div className="grow flex flex-col">
-              <div className="flex items-center w-full pl-6">
-                <Image src={'/avatars/image-maxblagun.png'} alt="maxblagun" height={1000} width={1000} className="size-9 mr-3"/>
-                <div className="mr-5 text-Grey-800 font-bold">maxblagun</div>
-                <div>2 weeks ago</div>
-                <div className="grow flex justify-end">
-                  <button
-                    onClick={() => ""}
-                    className="text-Purple-600 font-bold w-20 flex justify-center items-center"
-                  >
-                  <Image src={'/icon-reply.svg'} alt="reply-icon" height={1000} width={1000} className="size-4 mr-2"/>
-                    Reply
-                  </button>
-                </div>
-              </div>
-              <div className="px-6 py-3 text">
-                Impressive! Though it seems the drag feature could be improved. But overall it looks incredible. You&apos;ve nailed the design and the responsiveness at various breakpoints works really well.
-              </div>
-            </div>
+      <>
+        <div className="bg-white flex items-center justify-center rounded-lg w-full shadow-xs p-6 mb-3">
+          <LikeDislikeCounter 
+            commentId={id}
+            numOfLikes={numOfLikes} 
+
+          />
+          <CommentMain
+            id={id}
+            comment={comment}
+            date={date}
+            name={name}
+            isOwnComment={isOwnComment}
+            deleteFn={deleteFn}
+          />         
         </div>
+        {replies?.length > 0 && 
+        <Replies 
+          replies={replies} 
+          deleteFn={deleteFn}
+          />}
+      </>
     )
 }
