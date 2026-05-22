@@ -1,21 +1,28 @@
 import Image from "next/image"
 import { IComment } from "./comment"
 import { Dispatch, SetStateAction, useState } from "react"
+import { calculateTimePosted } from "../utils"
+import { ReplyBtn } from "./reply-btn"
+import { EditDeleteBtns } from "./edit-delete-btns"
 
-type ICommentMain = Pick<IComment, "name" | "date" | "isOwnComment" | "comment" | "deleteFn" | "id">
+type ICommentMain = Pick<IComment, "name" | "date" | "isOwnComment" | "comment" | "deleteFn" | "id" > & {
+    isReplyOpen: boolean,
+    setIsReplyOpen: Dispatch<SetStateAction<boolean>>
+    isEditable: boolean,
+    setIsEditable: Dispatch<SetStateAction<boolean>>
+}
 
-export const CommentMain = ({name, date, isOwnComment, comment, deleteFn, id}:ICommentMain) => {
+export const CommentMain = ({name, date, isOwnComment, comment, deleteFn, id, setIsReplyOpen, isEditable, setIsEditable}:ICommentMain) => {
     const [commentState, setCommentState] = useState(comment)
-    const [isEditable, setIsEditable] = useState(false)
     
     return (
-        <div className="grow flex flex-col pl-6">
+        <div className="grow flex flex-col pl-3 sm:pl-6 w-full">
             <div className="flex items-center w-full">
                 <Image src={`/avatars/image-${name}.png`} alt={`${name}-avatar`} height={1000} width={1000} className="size-9 mr-3"/>
                 <div className="mr-5 text-Grey-800 font-bold">{name}</div>
                 {isOwnComment && <div className="bg-Purple-600 px-2 text-white rounded-sm mr-5 text-md font-bold">you</div>}
-                <div>{date}</div>
-                <div className="grow flex justify-end">
+                <div>{calculateTimePosted(new Date(date))}</div>
+                <div className="grow justify-end hidden sm:flex">
                     {isOwnComment 
                     ? <EditDeleteBtns
                         isEditable={isEditable}
@@ -23,7 +30,10 @@ export const CommentMain = ({name, date, isOwnComment, comment, deleteFn, id}:IC
                         deleteFn={deleteFn}
                         id={id}
                        />
-                    : <ReplyBtn/>}
+                    : <ReplyBtn 
+                        onReplyClick={() => setIsReplyOpen(prev => !prev)}
+                       />
+                    }
                 </div>
             </div>
             {isEditable 
@@ -35,59 +45,17 @@ export const CommentMain = ({name, date, isOwnComment, comment, deleteFn, id}:IC
                 >
                     
                 </textarea> 
-                <div
+                <button
                     onClick={() => setIsEditable(false)} 
                     className="self-end mt-1 py-3 px-4 bg-Purple-600 text-white font-bold rounded-lg cursor-pointer transition hover:opacity-40">
                     UPDATE
-                </div>
+                </button>
               </>
             : <div 
-                className={` py-3`}
+                className={`py-3 wrap-anywhere`}
                >                
                 {commentState}
             </div>}
         </div>
-    )
-}
-
-
-const ReplyBtn = () => {
-    return (
-        <button
-            onClick={() => ""}
-            className="text-Purple-600 cursor-pointer font-bold w-20 flex justify-center items-center"
-        >
-            <Image src={'/icon-reply.svg'} alt="reply-icon" height={1000} width={1000} className="size-4 mr-2"/>
-            Reply
-        </button>
-    )
-}
-
-interface IEditDeleteBtns {
-    isEditable: boolean
-    setIsEditable: Dispatch<SetStateAction<boolean>>
-    deleteFn: (id: number) => void,
-    id: number
-}
-
-const EditDeleteBtns = ({isEditable, setIsEditable, deleteFn, id}: IEditDeleteBtns) => {
-    return (
-        <>
-            <button
-                onClick={() => deleteFn(id)}
-                className="text-Pink-400 transition hover:opacity-40 cursor-pointer font-bold w-20 flex justify-end items-center"
-            >
-                <Image src={'/icon-delete.svg'} alt="delete-icon" height={1000} width={1000} className="size-4 mr-2"/>
-                Delete
-            </button>
-            <button
-                onClick={() => setIsEditable(prev => !prev)}
-                disabled={isEditable}
-                className={`text-Purple-600 transition hover:opacity-40 disabled:opacity-40 disabled:cursor-auto cursor-pointer font-bold w-20 flex justify-end items-center`}
-            >
-                <Image src={'/icon-edit.svg'} alt="edit-icon" height={1000} width={1000} className="size-4 mr-2"/>
-                Edit
-            </button>
-        </>
     )
 }

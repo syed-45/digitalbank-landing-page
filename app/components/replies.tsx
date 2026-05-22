@@ -4,14 +4,15 @@ import { currentUser } from '../../data.json'
 
 interface IReplies {
     replies: IReply[]
-    deleteFn: (id: number) => void,
+    deleteFn: (id: string) => void,
+    replyFn(replyText: string, commentId: string): void
 }
 
-export const Replies = ({replies, deleteFn}: IReplies) => {
+export const Replies = ({replies, deleteFn, replyFn}: IReplies) => {
     return (
         <div className="w-full my-3 flex">
             <div className="mx-3 sm:mx-7 min-w-1 rounded-sm min-h-full bg-[#EBECF0]"></div>
-            <div className="flex flex-col">
+            <div className="grow">
                 {replies.map(reply => {
                 return (
                     <Comment
@@ -23,7 +24,8 @@ export const Replies = ({replies, deleteFn}: IReplies) => {
                         comment={reply.content}
                         isOwnComment={currentUser.username === reply.user.username} 
                         deleteFn={deleteFn}
-                        replies={[]}
+                        replyFn={replyFn}
+                        replies={reply.replies}
                     /> 
                 )
                 })}

@@ -1,11 +1,11 @@
 import { useState } from "react"
 
 interface ILikeDislikeCounter {
-  commentId: number
+  commentId: string
   numOfLikes: number,
 }
 
-export const LikeDislikeCounter = ({numOfLikes, commentId}: ILikeDislikeCounter) => {
+export const LikeDislikeCounter = ({numOfLikes}: ILikeDislikeCounter) => {
   const [isLiked, setIsLiked] = useState(false)
   const [isDisliked, setIsDisliked] = useState(false)
 
@@ -27,14 +27,15 @@ export const LikeDislikeCounter = ({numOfLikes, commentId}: ILikeDislikeCounter)
         setIsLiked(false)
         return false
       }
+      if (numOfLikes === 0) return prev
       return !prev
     })
   }
   return (
-    <div className="bg-gray-100 text-white rounded-xl flex flex-col px-2 h-fit self-start">
+    <div className="bg-gray-100 text-white rounded-xl flex items-center gap-3 sm:gap-0 sm:flex-col px-2 h-fit self-start">
         <button 
           onClick={onLikeClick}
-          className={`text-4xl cursor-pointer mx-auto transition hover:text-Purple-600 h-fit ${isLiked ? 'text-Purple-600' : 'text-Purple-200'}`}
+          className={`text-4xl cursor-pointer w-5 sm:w-auto mx-auto transition hover:text-Purple-600 h-fit ${isLiked ? 'text-Purple-600' : 'text-Purple-200'}`}
         >
           +
         </button>
@@ -43,7 +44,7 @@ export const LikeDislikeCounter = ({numOfLikes, commentId}: ILikeDislikeCounter)
         </div>
         <button 
           onClick={onDisikeClick}     
-          className="h-10 cursor-pointer hover:*:bg-Purple-600"               
+          className="h-10 cursor-pointer w-5 sm:w-auto hover:*:bg-Purple-600"               
         >
             <div className={`w-4 ${isDisliked ? 'bg-Purple-600' : 'bg-Purple-200'} h-1 rounded-[1px] mx-auto transition`}></div>                         
         </button>
