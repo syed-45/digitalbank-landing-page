@@ -4,13 +4,10 @@ import { currentUser, comments} from "../data.json"
 import { Comment } from "./components/comment"
 import { Modal } from "./components/modal"
 import { WriteComment } from "./components/write-comment"
-
-export type IReply = Omit<typeof comments[0]['replies'][0], 'replies'> & {
-    'replies' : IReply[]
-}
+import { IComment, IReply } from "./types"
 
 const Page = () => {
-    const [commentsState, setCommentsState] = useState(comments)
+    const [commentsState, setCommentsState] = useState<IComment[]>(comments)
     const [deleteId, setDeleteId] = useState("")
     const [IsModalOpen, setIsModalOpen] = useState(false)
 
@@ -33,35 +30,93 @@ const Page = () => {
 
     function deleteComment():void {
         setCommentsState(prevComments => {
-            let newComments = prevComments.filter(comment => comment.id !== deleteId)
-            newComments = newComments.map(comment => ({
-                    ...comment, 
-                    replies: comment.replies.filter(reply => reply.id !== deleteId)
-                })
-            )
+            const newComments:IComment[] = []
+
+            for (let idx = 0; idx < prevComments.length; idx++) {
+                const comment = prevComments[idx]
+                if (comment.id === deleteId) {
+                } else {
+                    newComments.push({
+                            ...comment,
+                            replies: traverseComments(comment.replies),
+                        }
+                    )
+                }
+            }    
+
+            function traverseComments(comments:IReply[]): IReply[] {
+                const newComments = []
+                for (let idx = 0; idx < comments.length; idx++) {
+                    const comment = comments[idx]
+                    if (comment.id === deleteId) {
+                    } else {
+                        newComments.push({
+                                ...comment,
+                                replies: traverseComments(comment.replies),
+                        })
+                    }                    
+                }                
+                
+                return newComments
+            }
+            
             return newComments
         })
         setIsModalOpen(false)
     }
 
     function replyToComment(replyText: string, commentId: string) {
-        setCommentsState(prevComments => prevComments.map(comment => comment.id === commentId 
-            ? {
-                ...comment, 
-                replies: [
-                    ...comment.replies,                                       
-                    {
-                        id: crypto.randomUUID(),
-                        content: replyText,
-                        createdAt: (new Date()).toString(),
-                        score: 0,
-                        replyingTo: prevComments.find(c => c.id === commentId)?.user.username || 'unkown',
-                        user: {...currentUser},
-                        replies: []
+        setCommentsState(prevComments => {
+            let commentFound = false
+            const newReply: IComment = {
+                id: crypto.randomUUID(),
+                content: replyText,
+                createdAt: (new Date()).toString(),
+                score: 0,
+                user: { ...currentUser },
+                replies: []
+            }
+
+            let newComments:IComment[] = prevComments.map(comment => {
+                if (comment.id === commentId) {
+                    commentFound = true 
+                    return {
+                        ...comment,
+                        replies: [...comment.replies, {
+                                ...newReply,
+                                replyingTo: comment.user.username
+                            },
+                        ]
                     }
-                ]
-            } : comment)
-        )
+                }
+                return comment
+            })
+
+            if (commentFound) return newComments
+
+            function traverseReplies(replies: IReply[]): IReply[] {
+                return replies.map(reply => {
+                    if (reply.id === commentId) {                        
+                        return { ...reply, replies: [...reply.replies, {
+                                ...newReply,
+                                replyingTo: reply.user.username
+                            }] 
+                        }
+                    }
+                    if (reply.replies.length > 0) {
+                        return { ...reply, replies: traverseReplies(reply.replies) }
+                    }
+                    return reply
+                })
+            }
+
+            newComments = newComments.map(comment => ({
+                    ...comment,
+                    replies: traverseReplies(comment.replies)
+                })
+            )
+            return newComments
+        })
     }
 
     return (
