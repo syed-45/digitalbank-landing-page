@@ -8,8 +8,8 @@ const publicSans = Public_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Digitalbank",
-  description: "Landing page for Digitalbank, Frontend Mentor challenge",
+  title: "Comment Section",
+  description: "Interactive Comment Section",
 };  
 
 
